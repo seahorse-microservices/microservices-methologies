@@ -30,7 +30,6 @@ class FormValidation {
   standalone: true,
   imports: [RouterOutlet, ReactiveFormsModule, NgClass],
   template: `
-  
   <div class="register-form">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="form-group">
