@@ -1,19 +1,29 @@
 import { TodoComponent } from "./todo.component";
+import { fireEvent, render, screen } from "@testing-library/angular";
 
 describe('TodoComponent', () => {
   let component: TodoComponent;
 
-  beforeEach(() => {
-    component = new TodoComponent();
+  beforeEach(async() => {
+    await render(TodoComponent);
   });
 
   it('should add a task to the list', () => {
-    component.addTask('New Task');
-    expect(component.tasks).toContain('New Task');
+		const newTaskInput = screen.getByRole('textbox');
+		const addTaskButton = screen.getByRole('button');
+
+		fireEvent['input'](newTaskInput, {target : {value : 'New Task'}});
+		fireEvent['click'](addTaskButton);
+
+		const newTask = screen.getByRole('listitem');
+		expect(newTask.textContent).toBe('New Task');
   });
 
   it('should not add an empty task', () => {
-    component.addTask('');
-    expect(component.tasks.length).toBe(0);
+		const addTaskButton = screen.getByRole('button');
+		fireEvent['click'](addTaskButton);
+
+		const notExistingNewTask = screen.queryByRole('listitem')!;
+		expect(notExistingNewTask).toBe(null);
   });
 });
