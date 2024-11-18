@@ -1,8 +1,11 @@
+import { Injectable } from "@nestjs/common";
+
 type UserData = { 
 	name: string, 
 	email: string 
 }
 
+@Injectable()
 export class UserService {
   private users = [];
   private idCounter = 1;
