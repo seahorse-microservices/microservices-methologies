@@ -1,8 +1,0 @@
-<h2>To-Do List</h2>
-<input type="text" #newTaskInput>
-<button (click)="addTask(newTaskInput.value); newTaskInput.value =''; newTaskInput.focus()">Add task</button>
-<ul>
-	@for (task of tasks; track task) {
-		<li>{{ task }}</li>
-	}
-</ul>
